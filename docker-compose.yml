@@ -1,0 +1,21 @@
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+
+  prod:
+    build:
+      context: .
+      target: prod
+    ports:
+      - "80:80"
