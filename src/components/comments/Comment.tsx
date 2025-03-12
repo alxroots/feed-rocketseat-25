@@ -1,9 +1,14 @@
 import imgAuthor from '../../assets/authorImg.png';
 import styles from './Comment.module.css';
 import {ThumbsUp, Trash} from "phosphor-react";
-import {Avatar} from "../avatar/Avatar.tsx";
+import {Avatar} from "../avatar/Avatar.tsx"
 
-export function Comment(){
+interface CommentProps {
+    content: string;
+}
+
+export function Comment({content}: CommentProps){
+    console.log('content', content)
     return (
         <div className={styles.comment}>
             <Avatar src={imgAuthor} hasBorder={false}/>
@@ -18,7 +23,7 @@ export function Comment(){
                             <Trash size={24}/>
                         </button>
                     </header>
-                    <p>Muito bom Devon, parabéns!!</p>
+                    <p>{content}</p>
                 </div>
                 <footer>
                     <button>

@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {format, formatDistanceToNow} from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import styles from './Post.module.css'
@@ -18,8 +19,16 @@ interface PostProps {
 }
 
 export function Post({author, content, publishedAt}: PostProps) {
+    const [comments, setComments] = useState(['Da hora este post'])
+
     const publishedAtFormatted = format(publishedAt, "dd 'de' MMMM 'às' HH:mm", {locale: ptBR})
     const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {locale: ptBR, addSuffix: true})
+
+    const handleCreateNewComment = (e: any) => {
+        e.preventDefault()
+        setComments([...comments, {content: e.target[0].value}])
+    }
+    console.log('comments', comments)
     return (
         <article className={styles.post}>
             <header>
@@ -57,10 +66,9 @@ export function Post({author, content, publishedAt}: PostProps) {
             </form>
 
             <div className={styles.commentList}>
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
+                {comments.map((comment, index) => (
+                    <Comment key={index} content={comment.content} />
+                ))}
             </div>
         </article>
     )
