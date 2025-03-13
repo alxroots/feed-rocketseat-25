@@ -15,6 +15,5 @@
   "trailingComma": "all",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "embeddedLanguageFormatting": "off",
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "embeddedLanguageFormatting": "off"
 }
