@@ -5,10 +5,10 @@ import { Avatar } from '../avatar/Avatar.tsx';
 
 interface CommentProps {
   content: string;
+  onDeleteComment: (content: string) => void;
 }
 
-export function Comment({ content }: CommentProps) {
-  console.log('content', content);
+export function Comment({ content, onDeleteComment }: CommentProps) {
   return (
     <div className={styles.comment}>
       <Avatar src={imgAuthor} hasBorder={false} />
@@ -21,7 +21,13 @@ export function Comment({ content }: CommentProps) {
                 Cerca de 1h atrás
               </time>
             </div>
-            <button title="Deletar comentário">
+            <button
+              title="Deletar comentário"
+              onClick={() => {
+                console.log('clicou');
+                onDeleteComment(content);
+              }}
+            >
               <Trash size={24} />
             </button>
           </header>
