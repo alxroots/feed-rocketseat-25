@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale/pt-BR';
 import styles from './Post.module.css';
@@ -37,11 +37,16 @@ export function Post({ author, content, publishedAt }: PostProps) {
   };
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    e.target.setCustomValidity('');
     setNewComment(e.target.value);
   };
 
   const handleDeleteComment = (comment: string) => {
     setComments(comments.filter((c) => c !== comment));
+  };
+
+  const handleInvalidInput = (e: InvalidEvent<HTMLTextAreaElement>) => {
+    e.target.setCustomValidity('Este campo não pode estar vazio');
   };
 
   return (
@@ -82,9 +87,13 @@ export function Post({ author, content, publishedAt }: PostProps) {
           placeholder="Deixe um comentário"
           value={newComment}
           onChange={handleCommentChange}
+          onInvalid={handleInvalidInput}
+          required
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={newComment.length === 0}>
+            Publicar
+          </button>
         </footer>
       </form>
 
