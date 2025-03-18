@@ -12,8 +12,7 @@ interface CommentProps {
 export function Comment({ content, onDeleteComment }: CommentProps) {
   const [clap, setClap] = useState(0);
   const handleClickClapping = () => {
-    console.log('clicou');
-    setClap(clap + 1);
+    setClap((state) => state + 1);
   };
   return (
     <div className={styles.comment}>

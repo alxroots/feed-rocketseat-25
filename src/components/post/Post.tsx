@@ -67,7 +67,6 @@ export function Post({ author, content, publishedAt }: PostProps) {
 
       <div className={styles.content}>
         {content.map((item, index) => {
-          console.log('content', item);
           if (item.type === 'text') {
             return <p key={index}>{item.value}</p>;
           } else if (item.type === 'link') {
