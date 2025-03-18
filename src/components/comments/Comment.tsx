@@ -1,7 +1,8 @@
 import imgAuthor from '../../assets/authorImg.png';
 import styles from './Comment.module.css';
-import { ThumbsUp, Trash } from 'phosphor-react';
+import { HandsClapping, Trash } from 'phosphor-react';
 import { Avatar } from '../avatar/Avatar.tsx';
+import { useState } from 'react';
 
 interface CommentProps {
   content: string;
@@ -9,6 +10,11 @@ interface CommentProps {
 }
 
 export function Comment({ content, onDeleteComment }: CommentProps) {
+  const [clap, setClap] = useState(0);
+  const handleClickClapping = () => {
+    console.log('clicou');
+    setClap(clap + 1);
+  };
   return (
     <div className={styles.comment}>
       <Avatar src={imgAuthor} hasBorder={false} />
@@ -24,7 +30,6 @@ export function Comment({ content, onDeleteComment }: CommentProps) {
             <button
               title="Deletar comentário"
               onClick={() => {
-                console.log('clicou');
                 onDeleteComment(content);
               }}
             >
@@ -34,9 +39,9 @@ export function Comment({ content, onDeleteComment }: CommentProps) {
           <p>{content}</p>
         </div>
         <footer>
-          <button>
-            <ThumbsUp />
-            Aplaudir <span>20</span>
+          <button onClick={handleClickClapping}>
+            <HandsClapping />
+            Aplaudir <span>{clap}</span>
           </button>
         </footer>
       </div>
